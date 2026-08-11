@@ -10,13 +10,9 @@ _G.CurrentFlyTween = nil
 local Locations = {
     [1231] = {
         Spawn = CFrame.new(-5023.9, 371.4, -3191.4),
-        Shop  = CFrame.new(-2900.5, 250.3, -1500.2),
-        Boss  = CFrame.new(1200.7, 100.5, 4500.8),
     },
     [31323] = {
-        Home    = CFrame.new(100, 50, 200),
-        Arena   = CFrame.new(-300, 75, 150),
-        Dungeon = CFrame.new(500, 100, -400),
+        Spawn  = CFrame.new(100, 50, 200),
     },
 }
 
@@ -24,7 +20,7 @@ local function fly(locationName, speed)
     -- 1. Kiểm tra xem PlaceId hiện tại có trong danh sách không
     local placeLocations = Locations[game.PlaceId]
     if not placeLocations or not placeLocations[locationName] then
-        warn("❌ E " .. tostring(locationName))
+        warn("❌ E101 " .. tostring(locationName))
         return
     end
 
@@ -72,7 +68,4 @@ local function fly(locationName, speed)
     _G.CurrentFlyTween:Play()
 end
 
--- ==========================================
--- CHẠY SCRIPT
--- ==========================================
 fly("Spawn")
