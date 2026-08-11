@@ -64,7 +64,7 @@ local function fly(locationName, speed)
 
         -- Chỉ print "hello" khi bay đến nơi thành công
         if state == Enum.PlaybackState.Completed then
-            print("hello")
+            replicated.Remotes.CommF_:InvokeServer("BuyFishmanKarate")
         end
     end)
 
