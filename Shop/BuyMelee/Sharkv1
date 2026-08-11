@@ -1,0 +1,58 @@
+-- Tween + Vector3 
+local TweenService = game:GetService("TweenService")
+local player = game.Players.LocalPlayer
+
+-- Khởi tạo biến global
+_G.CurrentFlyTween = nil
+_G.IsFlying = false
+
+local function flyToPositionSmooth(targetCFrame, speed)
+    speed = speed or 150
+    
+    local char = player.Character
+    if not char then return end
+    
+    local root = char:FindFirstChild("HumanoidRootPart")
+    local hum = char:FindFirstChildWhichIsA("Humanoid")
+    if not root or not hum then return end
+    
+    -- Hủy tween cũ nếu có
+    if _G.CurrentFlyTween then
+        _G.CurrentFlyTween:Cancel()
+        print("Ds[101]Er")
+    end
+    
+    root.CanCollide = false
+    hum.PlatformStand = true
+    _G.IsFlying = true
+    
+    local distance = (targetCFrame.Position - root.Position).Magnitude
+    local duration = distance / speed
+    
+    print("Ds[201] " .. math.floor(distance))
+    
+    -- Tạo tween và LƯU VÀO _G
+    _G.CurrentFlyTween = TweenService:Create(root, TweenInfo.new(
+        duration,
+        Enum.EasingStyle.Linear,
+        Enum.EasingDirection.Out
+    ), {
+        CFrame = targetCFrame
+    })
+    
+    _G.CurrentFlyTween.Completed:Connect(function(state)
+        if state == Enum.PlaybackState.Completed then
+            root.CanCollide = true
+            hum.PlatformStand = false
+            _G.IsFlying = false
+            _G.CurrentFlyTween = nil
+            print("Ds[102]")
+        end
+    end)
+    
+    _G.CurrentFlyTween:Play()
+end
+
+-- SỬ DỤNG
+local targetPosition = CFrame.new(-5023.9, 371.4, -3191.4)
+flyToPositionSmooth(targetPosition, 300) -- speed (Recommended: 200-300)
