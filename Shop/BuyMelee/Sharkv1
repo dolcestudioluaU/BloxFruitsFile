@@ -1,4 +1,3 @@
--- Tween + Vector3 
 local TweenService = game:GetService("TweenService")
 local player = game.Players.LocalPlayer
 
@@ -51,8 +50,20 @@ local function flyToPositionSmooth(targetCFrame, speed)
     end)
     
     _G.CurrentFlyTween:Play()
+    
+    return _G.CurrentFlyTween
 end
 
 -- SỬ DỤNG
 local targetPosition = CFrame.new(-5023.9, 371.4, -3191.4)
-flyToPositionSmooth(targetPosition, 300) -- speed (Recommended: 200-300)
+local tween = flyToPositionSmooth(targetPosition, 300)
+
+-- Chờ bay xong rồi mua Fishman Karate
+coroutine.wrap(function()
+    if tween then
+        tween.Completed:Wait()
+        -- Đợi thêm 1 chút để đảm bảo đã đến nơi
+        task.wait(0.5)
+        replicated.Remotes.CommF_:InvokeServer("BuyFishmanKarate")
+    end
+end)()
