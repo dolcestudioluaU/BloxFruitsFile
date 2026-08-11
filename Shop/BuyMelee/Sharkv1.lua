@@ -4,9 +4,6 @@ local Player = game.Players.LocalPlayer
 -- Biến global lưu trữ tween hiện tại để có thể dừng lại khi cần
 _G.CurrentFlyTween = nil
 
--- ==========================================
--- CẤU HÌNH TỌA ĐỘ THEO PLACE ID
--- ==========================================
 local Locations = {
     [1231] = {
         Spawn = CFrame.new(-5023.9, 371.4, -3191.4),
