@@ -5,10 +5,16 @@ local Player = game.Players.LocalPlayer
 _G.CurrentFlyTween = nil
 
 local Locations = {
-    [1231] = {
+    -- sea 3
+    [7449423635] = {
         Spawn = CFrame.new(-5023.9, 371.4, -3191.4),
     },
-    [31323] = {
+    -- sea 2
+    [4442272183] = {
+        Spawn  = CFrame.new(100, 50, 200),
+    },
+    -- sea 1
+    [2753915549] = {
         Spawn  = CFrame.new(100, 50, 200),
     },
 }
